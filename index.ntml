@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hanmo Zhang</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Hanmo Zhang</h1>
+      <p class="subtitle">meow meow</p>
+    </header>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>setup in progress</p>
+    </section>
+
+    <section id="links">
+      <h2>Links</h2>
+      <ul>
+        <li><a href="https://github.com/adgnvtefc" target="_blank">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/hanmo-zhang/" target="_blank">LinkedIn</a></li>
+        <li><a href="zhang.hanmo2018@gmail.com">Email</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
