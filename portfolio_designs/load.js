@@ -1,61 +1,57 @@
-(() => {
-  const catalog = Array.isArray(window.PORTFOLIO_DESIGNS)
-    ? window.PORTFOLIO_DESIGNS
-    : [];
+(async () => {
+  const scriptUrl = document.currentScript?.src;
+  if (!scriptUrl) return;
 
+  const designDirectory = new URL("./", scriptUrl);
+
+  let config;
+  try {
+    const response = await fetch(new URL("config.json", designDirectory), {
+      cache: "no-store"
+    });
+    if (!response.ok) return;
+    config = await response.json();
+  } catch {
+    return;
+  }
+
+  let catalog = Array.isArray(config.designs) ? config.designs : [];
   if (!catalog.length) return;
 
-  const storageKey = "portfolio-design-visibility";
-  const validIds = new Set(catalog.map((design) => design.id));
-  const defaultIds = catalog
-    .filter((design) => design.showInBar)
-    .map((design) => design.id);
   const params = new URLSearchParams(window.location.search);
   const fallbackDesign = catalog.find((design) => !design.stylesheet) || catalog[0];
   const selectedDesign =
     catalog.find((design) => design.id === params.get("design")) || fallbackDesign;
-  const isLocal = ["localhost", "127.0.0.1", "::1"].includes(
-    window.location.hostname
-  );
-  const canManage = isLocal || params.get("manage-designs") === "1";
 
-  function readStoredIds() {
+  if (selectedDesign.stylesheet) {
+    const stylesheet = document.createElement("link");
+    stylesheet.rel = "stylesheet";
+    stylesheet.href = new URL(selectedDesign.stylesheet, designDirectory);
+    document.head.append(stylesheet);
+  }
+
+  document.documentElement.dataset.design = selectedDesign.id;
+
+  async function localEditorIsAvailable() {
+    if (!["localhost", "127.0.0.1", "::1"].includes(window.location.hostname)) {
+      return false;
+    }
+
     try {
-      const stored = JSON.parse(window.localStorage.getItem(storageKey));
-      return Array.isArray(stored) ? stored.filter((id) => validIds.has(id)) : null;
+      const response = await fetch("/__portfolio/status", { cache: "no-store" });
+      if (!response.ok) return false;
+      const status = await response.json();
+      return status.editor === true && status.writable === true;
     } catch {
-      return null;
+      return false;
     }
   }
 
-  function readUrlIds() {
-    if (!params.has("show")) return null;
-    if (params.get("show") === "none") return [];
+  const canManage = await localEditorIsAvailable();
+  let manager;
 
-    return params
-      .get("show")
-      .split(",")
-      .filter((id) => validIds.has(id));
-  }
-
-  function writeStoredIds(ids) {
-    try {
-      window.localStorage.setItem(storageKey, JSON.stringify(ids));
-    } catch {
-      // The URL still carries the selection when browser storage is unavailable.
-    }
-  }
-
-  function clearStoredIds() {
-    try {
-      window.localStorage.removeItem(storageKey);
-    } catch {
-      // The defaults still work when browser storage is unavailable.
-    }
-  }
-
-  function setShowParameter(url, ids) {
-    url.searchParams.set("show", ids.length ? ids.join(",") : "none");
+  function visibleDesigns() {
+    return catalog.filter((design) => design.showInBar);
   }
 
   function designUrl(designId) {
@@ -70,32 +66,13 @@
     return `${url.pathname}${url.search}${url.hash}`;
   }
 
-  function viewerUrl(ids) {
-    const url = new URL(window.location.href);
-    url.searchParams.delete("manage-designs");
-    setShowParameter(url, ids);
-    return url.href;
-  }
-
-  if (selectedDesign.stylesheet) {
-    const stylesheet = document.createElement("link");
-    stylesheet.rel = "stylesheet";
-    stylesheet.href = selectedDesign.stylesheet;
-    document.head.append(stylesheet);
-  }
-
-  document.documentElement.dataset.design = selectedDesign.id;
-
-  let visibleIds = readUrlIds() ?? readStoredIds() ?? defaultIds;
-  let manager;
-
   function syncManager() {
     if (!manager) return;
 
     manager.checkboxes.forEach((checkbox) => {
-      checkbox.checked = visibleIds.includes(checkbox.value);
+      const design = catalog.find((candidate) => candidate.id === checkbox.value);
+      checkbox.checked = design?.showInBar === true;
     });
-    manager.viewerLink.value = viewerUrl(visibleIds);
   }
 
   function createManager() {
@@ -112,7 +89,7 @@
 
     const description = document.createElement("p");
     description.textContent =
-      "Choose which designs appear. This browser remembers your selection; the viewer link carries it to other people.";
+      "Choose which designs visitors can select. Saving changes the configuration file in this repository.";
 
     const fieldset = document.createElement("fieldset");
     const legend = document.createElement("legend");
@@ -130,89 +107,81 @@
       return checkbox;
     });
 
-    const linkLabel = document.createElement("label");
-    linkLabel.className = "viewer-link-label";
-    linkLabel.textContent = "Viewer link ";
-
-    const viewerLink = document.createElement("input");
-    viewerLink.type = "text";
-    viewerLink.readOnly = true;
-    viewerLink.setAttribute("aria-label", "Viewer link with selected designs");
-    linkLabel.append(viewerLink);
+    const status = document.createElement("p");
+    status.className = "design-manager-status";
+    status.setAttribute("role", "status");
+    status.setAttribute("aria-live", "polite");
 
     const actions = document.createElement("p");
     actions.className = "design-manager-actions";
 
     const saveButton = document.createElement("button");
     saveButton.type = "button";
-    saveButton.textContent = "Save";
+    saveButton.textContent = "Save to repo";
 
-    const copyButton = document.createElement("button");
-    copyButton.type = "button";
-    copyButton.textContent = "Copy viewer link";
+    const showAllButton = document.createElement("button");
+    showAllButton.type = "button";
+    showAllButton.textContent = "Show all";
 
-    const resetButton = document.createElement("button");
-    resetButton.type = "button";
-    resetButton.textContent = "Reset defaults";
+    const hideAllButton = document.createElement("button");
+    hideAllButton.type = "button";
+    hideAllButton.textContent = "Hide all";
 
     const closeButton = document.createElement("button");
     closeButton.type = "submit";
     closeButton.textContent = "Close";
 
-    actions.append(saveButton, copyButton, resetButton, closeButton);
-    form.append(title, description, fieldset, linkLabel, actions);
+    actions.append(saveButton, showAllButton, hideAllButton, closeButton);
+    form.append(title, description, fieldset, status, actions);
     dialog.append(form);
     document.body.append(dialog);
 
-    const currentCheckboxIds = () =>
-      checkboxes.filter((checkbox) => checkbox.checked).map((checkbox) => checkbox.value);
-
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener("change", () => {
-        viewerLink.value = viewerUrl(currentCheckboxIds());
+    showAllButton.addEventListener("click", () => {
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = true;
       });
+      status.textContent = "";
     });
 
-    saveButton.addEventListener("click", () => {
-      visibleIds = currentCheckboxIds();
-      writeStoredIds(visibleIds);
-
-      const url = new URL(window.location.href);
-      setShowParameter(url, visibleIds);
-      window.history.replaceState({}, "", url);
-
-      renderBar();
-      dialog.close();
+    hideAllButton.addEventListener("click", () => {
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+      });
+      status.textContent = "";
     });
 
-    resetButton.addEventListener("click", () => {
-      visibleIds = [...defaultIds];
-      clearStoredIds();
+    saveButton.addEventListener("click", async () => {
+      const visibleIds = checkboxes
+        .filter((checkbox) => checkbox.checked)
+        .map((checkbox) => checkbox.value);
 
-      const url = new URL(window.location.href);
-      url.searchParams.delete("show");
-      window.history.replaceState({}, "", url);
-
-      renderBar();
-      syncManager();
-    });
-
-    copyButton.addEventListener("click", async () => {
-      viewerLink.value = viewerUrl(currentCheckboxIds());
+      saveButton.disabled = true;
+      status.textContent = "Saving…";
 
       try {
-        await window.navigator.clipboard.writeText(viewerLink.value);
-        copyButton.textContent = "Copied";
-        window.setTimeout(() => {
-          copyButton.textContent = "Copy viewer link";
-        }, 1200);
-      } catch {
-        viewerLink.focus();
-        viewerLink.select();
+        const response = await fetch("/__portfolio/designs", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ visibleIds })
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || "Could not save the configuration.");
+        }
+
+        catalog = result.designs;
+        renderBar();
+        syncManager();
+        status.textContent = "Saved to portfolio_designs/config.json.";
+      } catch (error) {
+        status.textContent = error.message;
+      } finally {
+        saveButton.disabled = false;
       }
     });
 
-    return { dialog, checkboxes, viewerLink };
+    return { dialog, checkboxes };
   }
 
   function openManager() {
@@ -224,19 +193,19 @@
   function renderBar() {
     document.querySelector(".design-bar")?.remove();
 
-    const visibleDesigns = catalog.filter((design) => visibleIds.includes(design.id));
-    if (!visibleDesigns.length && !canManage) return;
+    const designs = visibleDesigns();
+    if (!designs.length && !canManage) return;
 
     const bar = document.createElement("nav");
     bar.className = "design-bar";
     bar.setAttribute("aria-label", "Portfolio design");
 
-    if (visibleDesigns.length) {
+    if (designs.length) {
       const label = document.createElement("span");
       label.textContent = "Design: ";
       bar.append(label);
 
-      visibleDesigns.forEach((design, index) => {
+      designs.forEach((design, index) => {
         if (index) bar.append(" | ");
 
         if (design.id === selectedDesign.id) {
@@ -254,7 +223,7 @@
     }
 
     if (canManage) {
-      if (visibleDesigns.length) bar.append(" | ");
+      if (designs.length) bar.append(" | ");
       const manageButton = document.createElement("button");
       manageButton.type = "button";
       manageButton.textContent = "manage designs";

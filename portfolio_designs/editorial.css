@@ -144,21 +144,10 @@ header > p {
   margin: 0.25rem 0;
 }
 
-.viewer-link-label {
-  display: block;
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-}
-
-.viewer-link-label input {
-  display: block;
-  width: 100%;
-  margin-top: 0.4rem;
-  padding: 0.55rem;
-  border: 1px solid var(--line);
-  border-radius: 0;
-  background: white;
+.design-manager-status {
+  min-height: 1.5em;
+  margin: 1rem 0 0;
+  color: var(--blue);
   font-family: var(--mono);
   font-size: 0.75rem;
 }
