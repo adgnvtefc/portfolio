@@ -19,6 +19,7 @@ html {
 }
 
 body {
+  position: relative;
   width: min(calc(100% - 3rem), 1120px);
   margin: 0 auto;
   color: var(--ink);
@@ -58,7 +59,7 @@ header h1 {
   letter-spacing: -0.075em;
 }
 
-header > p:not(.design-picker) {
+header > p {
   position: absolute;
   right: 1rem;
   bottom: 3.5rem;
@@ -72,10 +73,11 @@ header > p:not(.design-picker) {
   transform: rotate(-5deg);
 }
 
-.design-picker {
+.design-bar {
   position: absolute;
   top: 1.5rem;
   right: 0;
+  z-index: 2;
   margin: 0;
   font-family: var(--mono);
   font-size: 0.7rem;
@@ -83,15 +85,104 @@ header > p:not(.design-picker) {
   text-transform: uppercase;
 }
 
-.design-picker a {
+.design-bar a,
+.design-bar button {
   color: var(--blue);
 }
 
-.design-picker a[aria-current="page"] {
+.design-bar strong {
   padding: 0.18rem 0.3rem;
   color: var(--ink);
   background: var(--acid);
-  text-decoration: none;
+  font-weight: 400;
+}
+
+.design-bar button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+.design-manager {
+  width: min(calc(100% - 2rem), 560px);
+  padding: 1.5rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--sans);
+  font-size: 1rem;
+}
+
+.design-manager::backdrop {
+  background: rgba(16, 16, 16, 0.68);
+}
+
+.design-manager h2 {
+  margin: 0 0 1rem;
+  font-family: var(--serif);
+  font-size: 2.6rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.design-manager fieldset {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--ink);
+}
+
+.design-manager fieldset label {
+  display: inline-block;
+  margin: 0.25rem 0;
+}
+
+.viewer-link-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.viewer-link-label input {
+  display: block;
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: white;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.design-manager-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0 0;
+}
+
+.design-manager-actions button {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  color: var(--ink);
+  background: white;
+  font: inherit;
+  cursor: pointer;
+}
+
+.design-manager-actions button:first-child {
+  color: white;
+  background: var(--blue);
 }
 
 body > hr {
@@ -240,10 +331,11 @@ main section > :not(h2) {
     font-size: clamp(4.5rem, 25vw, 8rem);
   }
 
-  .design-picker {
-    left: 0;
-    right: auto;
+  .design-bar {
+    position: static;
     max-width: 100%;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--ink);
   }
 
   main section {
