@@ -15,9 +15,15 @@ The files here are optional:
 Without them, `/` remains the complete plain-HTML portfolio. The editorial view
 is available at `/?design=editorial-index`.
 
-Run `python3 manage.py` from the repository, then use **manage designs** in the
-local design bar. **Save to repo** writes the selection directly to
-`config.json`. The public site never receives an editor or a GitHub credential.
+To show or hide a design in the bar, edit its `showInBar` value in `config.json`:
+
+```json
+"showInBar": true
+```
+
+Use `true` to show it and `false` to hide it. If every design is `false`, the
+design bar is omitted. A hidden design can still be opened directly with its
+`?design=` URL.
 
 ## Adding a design
 

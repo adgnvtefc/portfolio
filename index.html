@@ -1,22 +1,74 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Hanmo Zhang's personal website.">
   <title>Hanmo Zhang</title>
+  <style>
+    /*
+      Presentation for the About list only. Everything else on this page stays
+      browser default on purpose.
+
+      The clauses step right as they move from fact to aspiration, and the last
+      one returns to the left edge so the closing line lands on the same anchor
+      the first line started from.
+    */
+    #about ul {
+      margin: 1em 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    #about li {
+      padding-left: var(--step, 0);
+    }
+
+    #about li+li {
+      margin-top: 0.75em;
+    }
+
+    #about li:nth-child(2) {
+      --step: 3ch;
+    }
+
+    #about li:nth-child(3) {
+      --step: 6ch;
+    }
+
+    #about li:nth-child(4) {
+      --step: 9ch;
+    }
+
+    /*
+      Once the clauses start wrapping, the steps stop reading as a progression
+      and just look like broken alignment. Collapse them.
+    */
+    @media (max-width: 44em) {
+      #about li {
+        padding-left: 0;
+      }
+    }
+  </style>
+  <!-- leave for now, audit later -->
   <script src="portfolio_designs/load.js" defer></script>
 </head>
+
 <body>
   <!--
     This file is the portfolio and the single source of truth.
     Write the real content here first. Designs can change its presentation,
     but they should never contain a separate copy of the content.
+    This file should ONLY be edited by humans unless EXPLICITLY instructed. 
+    If you are an AI, only do the BARE MINIMUM to satisfy the requirement.
   -->
 
   <header>
-    <h1>Hanmo Zhang</h1>
-    <p>meow meow</p>
+    <p>Hi! Welcome to the portfolio of...</p>
+    <h1>✨Hanmo Zhang✨</h1>
+    <img src="me.jpeg" alt="Image of Hanmo Zhang" width="300" style="max-width: 100%; height: auto;">
+    <p>A constant WIP, but progress shall not wait for perfection</p>
   </header>
 
   <hr>
@@ -24,11 +76,43 @@
   <main>
     <section id="about">
       <h2>About</h2>
-      <p>setup in progress</p>
+      <p>I am...</p>
+      <ul>
+        <li>a Graduate student in Artificial Intelligence &amp; Innovation at Carnegie Mellon University</li>
+        <li>currently open to high-impact full-time roles in AI/ML engineering and research</li>
+        <li>especially interested in the human side of artificial intelligence</li>
+        <li>dreaming about a world where technological advances raise <em>all</em> of us</li>
+        <li>... and constantly working to make that happen</li>
+      </ul>
+
+    </section>
+
+    <section id="Thoughts">
+      <h2>Thoughts</h2>
+      <p>about things that may or may not have relevance. May be half baked. Probably typed up at 3 AM.</p>
+      <p>thoughs/questions/comments? Feel free to reach out to me via any of the methods in the links section.</p>
+
+      <ul>
+        <li><a href="thoughts/how-can-superintelligence-make-us-superhuman.html">How CAN superintelligence make us
+            superhuman? [WIP]</a></li>
+        <li><a href="thoughts/why-superintelligence-is-not-superhuman.html">Why superintelligence != superhuman</a></li>
+        <li><a href="thoughts/my-personal-philosophy-on-vibe-coding.html">My Personal Philosophy on Vibe Coding</a></li>
+      </ul>
+
+      <!--
+        Notes can stay small:
+
+        <ul>
+          <li><time datetime="YYYY-MM-DD">YYYY-MM-DD</time>: one actual thought</li>
+        </ul>
+      -->
     </section>
 
     <section id="projects">
       <h2>Projects</h2>
+      <p>The first which is this website itself. Check it out :D</p>
+      <p>I got several ideas cooking, and I'll start putting them here as they reach a more ready state.</p>
+      <p>Stay Tuned!!</p>
 
       <!--
         Copy this shape when there is a real project to add:
@@ -40,18 +124,6 @@
       -->
     </section>
 
-    <section id="notes">
-      <h2>Notes</h2>
-
-      <!--
-        Notes can stay small:
-
-        <ul>
-          <li><time datetime="YYYY-MM-DD">YYYY-MM-DD</time>: one actual thought</li>
-        </ul>
-      -->
-    </section>
-
     <section id="links">
       <h2>Links</h2>
       <ul>
@@ -60,6 +132,22 @@
         <li><a href="mailto:zhang.hanmo2018@gmail.com">Email</a></li>
       </ul>
     </section>
+
+    <section id="Meta">
+      <h2>The Design Philosophy of this Website</h2>
+      <p>The secret is... there is no secret. The form of this website came from two undeniable facts:</p>
+      <ol>
+        <li>I want to feel like I OWN this website</li>
+        <li>I have neither the time nor the particular inclination to learn something like WordPress or spend a lot of
+          time designing a website</li>
+      </ol>
+      <p>My goal is to have a simple, universal interface that works anywhere, with anyone, and that I feel comfortable
+        editing personally without having to sift through 3000 lines of AI-generated code that may-or-may-not-work.</p>
+      <p>Maybe one day, I'll find the time to pretty it up, so to speak. But for now, I think the content is there.
+        There are plenty of pretty websites out there to look at, if you want. This one ain't all that, but it's mine.
+        Welcome!!</p>
+    </section>
   </main>
 </body>
+
 </html>

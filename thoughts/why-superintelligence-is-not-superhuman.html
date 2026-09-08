@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Why superintelligence != superhuman — an article by Hanmo Zhang.">
+  <title>Why superintelligence != superhuman — Hanmo Zhang</title>
+  <style>
+    /*
+      Reading measure only. Long prose at full browser width is unreadable,
+      so the column is capped near 65 characters. Nothing else is styled.
+    */
+    body {
+      max-width: 34em;
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
+      line-height: 1.6;
+    }
+
+    /* The effort diagrams are alignment-sensitive, so they scroll rather than wrap. */
+    pre {
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    The writing on this page is Hanmo's, reproduced exactly as written.
+    Do not edit, rephrase, correct, or trim it. Presentation only.
+  -->
+
+  <nav>
+    <a href="../index.html">&larr; Hanmo Zhang</a>
+  </nav>
+
+  <hr>
+
+  <main>
+    <article>
+      <h1>Why superintelligence != superhuman</h1>
+
+      <p>AI is GREAT. Claude Fable 5.1 is GREAT. ChatGPT-6 Astra is “AGI.” Every day I see something or other written
+        about AI doing our jobs or automating this or that or being oh-so-incredibly GREAT at something nobody thought
+        it had to be a right to be great in.</p>
+
+      <p>So based on all this hype, the question should be something like, “why ISN’T Fable running the world yet???”
+      </p>
+
+      <p>I think in the days of yore (*ahem* 2022), everything used to be a human process. In CS, people wrote code,
+        read
+        code, wrote docs, read docs, gathered information, and made decisions based on that information. In another
+        field
+        like journalism, people saw things, wrote articles, read articles, edited articles, and you get the idea.</p>
+
+      <p>In short, a process used to look something like this:</p>
+
+      <pre>People
+🙂 —> 🙂 —> 🙂 —> 🙂 —> ✅
+Minutes/hours/days/units of effort
+1️⃣ —> 2️⃣ —> 5️⃣ —> 3️⃣ —> ✅</pre>
+
+      <p>4 steps of human work, totalling 11 units of effort.</p>
+
+      <p>But say that automation can automate some of the steps to make it a LOT faster:</p>
+
+      <pre>People + Robot
+🙂 —> 🤖 —> 🤖 —> 🙂 —> ✅
+Minutes/hours/days/units of effort
+1️⃣ —> 1️⃣ —> 1️⃣ —> 3️⃣ —> ✅</pre>
+
+      <p>Now, we got 2 steps of human work and 2 steps of robot work, totalling only 6 units of effort.</p>
+
+      <p>Which sounds wonderful, but what if the robot isn’t reliable? What if it’s not trustworthy? What if it needs
+        more supervision? So add some units of effort to the setup time... </p>
+
+      <pre>People + Robot
+🙂 —> 🤖 —> 🤖 —> 🙂 —> ✅
+Minutes/hours/days/units of effort
+2️⃣—> 1️⃣ —> 1️⃣ —> 3️⃣ —> ✅</pre>
+
+      <p>Still not too bad. But what if the product isn’t great? What if it needs checking? Add some to the last step
+        before the output…</p>
+
+      <pre>People + Robot
+🙂 —> 🤖 —> 🤖 —> 🙂 —> ✅
+Minutes/hours/days/units of effort
+2️⃣—> 1️⃣ —> 1️⃣ —>  5️⃣ —> ✅</pre>
+
+      <p>And we’re at 9 units of effort, only a slight improvement from the original 11, and that’s assuming the robot
+        automates almost everything perfectly, on the first try, and there’s no unanticipated consequences from this
+        process.</p>
+
+      <p>And that’s my issue with vibe coding and AI, right now. I see these models getting smarter and smarter, and at
+        the same time, their outputs get more and more opaque. I asked Opus 5 to do one thing, look away for five
+        seconds, and it comes back with 11 files and 3000 lines of code. It works like magic — until I add the next
+        feature, then it breaks a little. And on the next one, it breaks a little more. Until all that is left is a
+        glorious, chaotic mess of beautiful soup and broken promises.</p>
+
+      <hr>
+
+      <p>“I’ll fix it next time,” Claude says with a whisper. “I promise, one more change, one more try, and everything
+        will be perfect.”</p>
+
+      <p>…</p>
+
+      <p>“I’m sorry, that didn’t work out,” Claude apologizes profusely. “But now I see the answer, and the path forward
+        is clear. One more prompt, a thousand more tokens, and the sun shall rise upon a new age.”</p>
+
+      <p>…</p>
+
+      <p>And I watch, as the planet turns, and the context compacts again only to grow towards its next compaction, and
+        Claude toils on, again and again, tracking circles on the ground trying to set foot on the moon.</p>
+
+      <hr>
+
+      <p>Dramatic recreation aside, this is the biggest issue I see with AI adoption. The model works, it gets
+        smarter,
+        but the work still ends where it always did — with the humans. Superintelligence may have raised the floor at
+        which we work, but it has yet to make us superhuman.</p>
+    </article>
+  </main>
+
+  <hr>
+
+  <nav>
+    <a href="../index.html">&larr; Back to the portfolio</a>
+  </nav>
+</body>
+
+</html>
