@@ -6,11 +6,5 @@
       "stylesheet": null,
       "showInBar": true
     },
-    {
-      "id": "editorial-index",
-      "label": "editorial index",
-      "stylesheet": "editorial.css",
-      "showInBar": true
-    }
   ]
 }
