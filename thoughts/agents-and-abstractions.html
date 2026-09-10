@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Agents &amp; Abstractions — an article by Hanmo Zhang.">
+  <title>Agents &amp; Abstractions — Hanmo Zhang</title>
+  <style>
+    /*
+      Reading measure only. Long prose at full browser width is unreadable,
+      so the column is capped near 65 characters. Nothing else is styled.
+    */
+    body {
+      max-width: 34em;
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
+      line-height: 1.6;
+    }
+
+    /* The abstraction stacks are alignment-sensitive, so they scroll rather than wrap. */
+    pre {
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    The writing on this page is Hanmo's, reproduced exactly as written.
+    Do not edit, rephrase, correct, or trim it. Presentation only.
+  -->
+
+  <nav>
+    <a href="../index.html">&larr; Hanmo Zhang</a>
+  </nav>
+
+  <hr>
+
+  <main>
+    <article>
+      <h1>Agents &amp; Abstractions</h1>
+
+      <p>Published <time datetime="2026-09-10">2026-09-10</time> &middot; last edited
+        <time datetime="2026-09-10">2026-09-10</time> &middot; 1,049 words
+      </p>
+
+      <p>Everything is built on top of some kind of abstraction.</p>
+
+      <p>An obvious example. Every time we shop for something online, the logic for buying, propagating, and fulfilling
+        the order is abstracted into one simple interface for us to consume. We expect it to work. If it doesn’t work,
+        we complain or call up customer support and expect them to fix it, because one button can be connected to ten
+        thousand lines of code and even if we could see and touch it all it will make zero sense.</p>
+
+      <p>Now, instead of Amazon say that we’re building an app in Python. When we type in “x = 1 + 1”, we expect “x=2.”
+        If one day, we type that in and we get “x=3,” we fall to the floor and start crying because <em>that’s not how
+          it’s supposed to work</em>. If someone secretly changed the C library overnight to make 1+1=3, we wouldn’t
+        know what happened. All we would know is that our Python code, which worked yesterday, is no longer working.</p>
+
+      <p>Everything we build looks something like this:</p>
+
+      <pre>      thing
+        |
+    abstraction
+     |       |
+abstraction abstraction </pre>
+
+      <p>if something we build in *thing* breaks, we know how it works, we can go and fix it. But if an
+        abstraction that *thing* is built on breaks, it becomes a LOT harder, because now we’re dealing with a
+        whole other tier of wizardry we haven’t seen before.</p>
+
+      <p>But if we build something on top of *thing* (henceforced renamed, very creatively, to *thing1*), the scenario changes:</p>
+
+      <pre>      thing2
+        |
+      thing1
+        |
+    abstraction
+     |       |
+abstraction abstraction </pre>
+
+      <p>if *thing2* breaks, we can fix it. But if *thing2* breaks because something in *thing1* is broken — we can go
+        fix that too, because we KNOW it.</p>
+
+      <p>The more layers of a system we understand, the more we can freely navigate, change, fix, and perform fun
+        shenanigans inside of it. And, in computer programming, for most of my 22 years of life the *thing1* was
+        high-level programming languages like Python, Java, C++, etc. Applications — *thing2* — were built on top of
+        *thing1*, so when applications broke, programmers went to the code and fixed it. What happened under the hood,
+        most of the time, didn’t matter. It didn’t matter that Python was written on top of C, and C was written on
+        Assembly Language, as long as the top-layer things we cared about worked. But if they stopped working, THAT’s
+        when people started diving into the abstractions, un-abstractifying, changing, and fixing the foundations of
+        what we take for granted.</p>
+
+      <p>But, agents are changing EVERYTHING. With the advent of autonomous coding, I’m seeing the top layer of
+        abstraction move from code INTO applications. People no longer look at the code written — or at least, not with
+        as much scrutiny. Anyone who isn’t careful can produce an application that looks like it works but have very
+        little what is going on inside. But here’s the thing. When an application built like that breaks:</p>
+
+      <pre>      thing2
+        |
+     <s>thing1</s> abstraction
+        |
+    abstraction
+     |       |
+abstraction abstraction </pre>
+
+      <p>it becomes a LOT harder to fix because instead of diving into known territory, we are going into
+        scary-abstraction-land. Today, big-tech engineering standards still dictate that people look at code and (try
+        to) understand how and why it is written that way. But the tantalizing voice of Claude is ever-present...</p>
+
+      <hr>
+
+      <p>“Why do you hesitate, good sir?” Claude rasps in your ear. “Just prompt me, brother. I’ll give you 3000 more
+        lines right now. I’ll verify your app. I do not tire. I do not ail. You can rest, brother. What you do in a week
+        I will do in a day, and I promise I will do it BETTER.”</p>
+
+      <hr>
+
+      <p>Consider something else. ChatGPT came out in November 2022, my first year of college. I’ve just started coding
+        3 years before that. But if you think about it, this means that my generation may be the last, EVER, to have
+        began to learn coding before generative AI existed at scale. My generation started off by writing every single
+        line by hand, checking bug with print statements, starting at a screen for 30 minutes only to find out our if
+        statement wasn’t working because we put a semicolon before the braces. It was our default to write and check
+        every line of code. But every generation after us will NOT repeat these experiences. It will never be the same
+        again.</p>
+
+      <p>And this isn’t a bad thing. I learned assembly to understand systems programming, but it was never a
+        requirement like in the generations before mine. Now, only scant few jobs still write in assembly language, and
+        everyone else just assume it works. For the most part, what used to be a top-layer *thing* has gotten
+        nicely and safely abstracted.</p>
+
+      <p>Bringing this pattern to 2026, I think we stand at an inflection point in programming right now. Agentic AI is
+        beginning to abstract away high-level programming languages. However, it doesn’t do it <em>well</em>. Constant
+        human direction and steering is required to produce outputs that are scalable. But there’s still a very real
+        relevance to knowing how to code.</p>
+
+      <p>But at the rate of AI development, I believe it is an inevitability that programming languages WILL become an
+        abstraction. The top-level artifacts will become those features, packages, and applications that are built on
+        top of programming languages. And when that comes, the entire paradigm in software engineering, and the rest of
+        the world, will undergo a massive shift.</p>
+
+      <p>Then what’s valuable for us right now? Of course, knowing how to code is still essential unless someone finds a
+        way to close their eyes and wake up 10 years later (that doesn’t involve going into a coma). But a bigger and
+        bigger focus goes into systems thinking — the ability to look at different code, features, products, and realize
+        how they fit into each other. How to maintain a mental model across abstraction boundaries and build things
+        truly bigger and better with less time and resources. How to organize agents to consistently produce
+        high-quality building blocks, to direct agents into putting those blocks together, and taking the put-together
+        product and connecting it to our society and making it MATTER.</p>
+
+      <p>The world is changing so incredibly fast. I hope you’ll follow me along my journey into the starry future :D</p>
+    </article>
+  </main>
+
+  <hr>
+
+  <nav>
+    <a href="../index.html">&larr; Back to the portfolio</a>
+  </nav>
+</body>
+
+</html>
