@@ -45,11 +45,11 @@
       <h1>The State of My Projects, November 2026</h1>
 
       <p>Published <time datetime="2026-11-12">2026-11-12</time> &middot; last edited
-        <time datetime="2026-11-12">2026-11-12</time> &middot; 976 words &middot; ~5 min read
+        <time datetime="2026-11-12">2026-11-12</time> &middot; 971 words &middot; ~5 min read
       </p>
 
       <p>Hi everyone!! It has been almost a solid 2 months since the last update to my portfolio, and I know that you
-        missed me very very much. There are a few new projects in the Projects section. I want to take a minute to talk
+        missed me very very much. There are a few new projects in the <a href="../index.html#projects">Projects section</a>. I want to take a minute to talk
         about these.</p>
 
       <p>So, I recently got my hands on a Mac Studio — originally for local LLMs — and it has been unsurprisingly FUN
@@ -69,10 +69,10 @@
       <p>And the three projects I describe next each achieve one of these goals. The projects that follow build on top
         of that foundation.</p>
 
-      <p>The first project on here is Orchestra, an agent orchestration platform that I want to be the centerpiece of
+      <p>The first project on here is <a href="../index.html#orchestra">Orchestra</a>, an agent orchestration platform that I want to be the centerpiece of
         agentic AI in my own projects. It’s my most involved project, but it’s also been my most neglected project
-        recently. Why? Because I realized, soon after building it, that there is a lot of OTHER cool stuff you can do
-        with an ultra-powerful computer that never sleeps beyond LLMs.</p>
+        recently. Why? Because I realized, soon after building it, that there is a lot of OTHER cool stuff beyond LLMs
+        you can do with an ultra-powerful computer that never sleeps.</p>
 
       <p>And while Orchestra will remain a centerpiece in my future efforts (because a lot of the cool stuff becomes
         COOLER once you realize that you have an intelligent-seeming little person inside your computer at your beck
@@ -91,24 +91,23 @@
         future endeavors.</p>
 
       <p>Of course, this is a very long-term effort, and who knows if it will pay off? But I would rather build this
-        feature out early than look back three months and realize that I could’ve had the exact data I needed to make
+        feature out early than look back three months from now and realize that I could’ve had the exact data I needed to make
         it better.</p>
 
-      <p>The analytics equivalent of Orchestra is Catseye. Named after the eye of a cat (yeah I’m not that good at
+      <p>The analytics equivalent of Orchestra is <a href="../index.html#catseye">Catseye</a>. Named after the eye of a cat (yeah I’m not that good at
         names), it serves as the centralized analytics data-ingestion point for my applications. Connected to it is
-        Monitor Hub, which serves this data in a human-friendly frontend. Together, these three applications make up
+        <a href="../index.html#monitor-hub">Monitor Hub</a>, which serves this data in a human-friendly frontend. Together, these three applications make up
         the core of the HBS — Hanmo Business Suite. Most of the following apps use this structure:</p>
 
-      <pre>                    LLM / Agent data -&gt; Orchestra
-Frontend -&gt; Server -&gt;  App Data              -&gt; The App Itself
-                    Usage data       -&gt; Catseye</pre>
+      <pre>                      LLM / Agent data -&gt; Orchestra
+Frontend -&gt; Server -&gt; App Data         -&gt; The App Itself
+                      Usage data       -&gt; Catseye -&gt; Monitor Hub</pre>
 
-      <p>Most files live as either SQLite DBs or JSON files because, frankly, I do not need to build at scale yet.
-        Besides, now that I understand this structure, building apps at scale is mainly a matter of distributing this
-        computation, applying whatever the current best-in-class method is, and all the complexity required to make
-        that possible.</p>
+      <p>Most files live as either SQLite DBs or JSON files because, frankly, I do not need to build at scale yet. I’ll confidently cross that bridge when I get there.
+      </p>
 
-      <p>A few running apps are Pixel Game, Loveletter, and TextBot. These are mostly for fun and not too technically
+      <p>A few running apps are <a href="../index.html#pixel-game">Pixel Game</a>,
+        <a href="../index.html#loveletter">Loveletter</a>, and <a href="../index.html#textbot">TextBot</a>. These are mostly for fun and not too technically
         complex, so I’ll let you explore the publicly available ones yourself!!</p>
 
       <p>As for future ambitions — I want to explore building products that can connect people, improve productivity,
