@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The State of My Projects, November 2026 — an article by Hanmo Zhang.">
+  <title>The State of My Projects, November 2026 — Hanmo Zhang</title>
+  <script>window.catseye=window.catseye||function(){(catseye.q=catseye.q||[]).push(arguments)}</script>
+  <script async src="https://hanmos-mac-studio.tail6c4683.ts.net/catseye/v1/catsi.js" data-site="portfolio"></script>
+  <style>
+    /*
+      Reading measure only. Long prose at full browser width is unreadable,
+      so the column is capped near 65 characters. Nothing else is styled.
+    */
+    body {
+      max-width: 34em;
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
+      line-height: 1.6;
+    }
+
+    /* The architecture diagram is alignment-sensitive, so it scrolls rather than wraps. */
+    pre {
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    The writing on this page is Hanmo's. Only corrections explicitly approved
+    by Hanmo have been made; the structure below is presentation only.
+  -->
+
+  <nav>
+    <a href="../index.html">&larr; Hanmo Zhang</a>
+  </nav>
+
+  <hr>
+
+  <main>
+    <article>
+      <h1>The State of My Projects, November 2026</h1>
+
+      <p>Published <time datetime="2026-11-12">2026-11-12</time> &middot; last edited
+        <time datetime="2026-11-12">2026-11-12</time> &middot; 976 words &middot; ~5 min read
+      </p>
+
+      <p>Hi everyone!! It has been almost a solid 2 months since the last update to my portfolio, and I know that you
+        missed me very very much. There are a few new projects in the Projects section. I want to take a minute to talk
+        about these.</p>
+
+      <p>So, I recently got my hands on a Mac Studio — originally for local LLMs — and it has been unsurprisingly FUN
+        to play with regarding everything. I’ll first give an overview of everything in the projects section so far,
+        and then I’ll ask some questions I anticipate getting.</p>
+
+      <p>The core idea in these early projects is that I want to set up a suite of applications to serve as the backbone
+        of all future projects. Thinking from first principles, for any application I’d want:</p>
+
+      <ol>
+        <li>Some centralized way to call LLMs so I don’t have to maintain different providers, logging, and versions
+          for each different application</li>
+        <li>Analytic information to see how people are using it and where to improve</li>
+        <li>A way to keep track of the state of each application</li>
+      </ol>
+
+      <p>And the three projects I describe next each achieve one of these goals. The projects that follow build on top
+        of that foundation.</p>
+
+      <p>The first project on here is Orchestra, an agent orchestration platform that I want to be the centerpiece of
+        agentic AI in my own projects. It’s my most involved project, but it’s also been my most neglected project
+        recently. Why? Because I realized, soon after building it, that there is a lot of OTHER cool stuff you can do
+        with an ultra-powerful computer that never sleeps beyond LLMs.</p>
+
+      <p>And while Orchestra will remain a centerpiece in my future efforts (because a lot of the cool stuff becomes
+        COOLER once you realize that you have an intelligent-seeming little person inside your computer at your beck
+        and call without the psychological block of worrying about API costs or a token limit), I’m reminded of one of
+        my philosophies: that computer science and software engineering as a field began as a way to better humanity.</p>
+
+      <p>While some developments — like the agentic web — promote designing websites and services meant to be used by
+        machines and computers (which I support in its own right), the end goal of all this is to better humanity in
+        some way. Otherwise, what’s the point? So yes, AI, LLMs, and Orchestra will remain a centerpiece in all my
+        future efforts, but it won’t be JUST AI that I care about.</p>
+
+      <p>One of the main design principles around Orchestra is tracking &amp; provenance. Really, I spent an obscene
+        amount of time designing how to log &amp; track conversations, sessions, and the whole shebang. My logic is
+        that since Orchestra is designed to be the central interface for LLMs my apps use, over time I will collect
+        many many trajectories, and using those trajectories I can fine-tune or build better models for my apps and
+        future endeavors.</p>
+
+      <p>Of course, this is a very long-term effort, and who knows if it will pay off? But I would rather build this
+        feature out early than look back three months and realize that I could’ve had the exact data I needed to make
+        it better.</p>
+
+      <p>The analytics equivalent of Orchestra is Catseye. Named after the eye of a cat (yeah I’m not that good at
+        names), it serves as the centralized analytics data-ingestion point for my applications. Connected to it is
+        Monitor Hub, which serves this data in a human-friendly frontend. Together, these three applications make up
+        the core of the HBS — Hanmo Business Suite. Most of the following apps use this structure:</p>
+
+      <pre>                    LLM / Agent data -&gt; Orchestra
+Frontend -&gt; Server -&gt;  App Data              -&gt; The App Itself
+                    Usage data       -&gt; Catseye</pre>
+
+      <p>Most files live as either SQLite DBs or JSON files because, frankly, I do not need to build at scale yet.
+        Besides, now that I understand this structure, building apps at scale is mainly a matter of distributing this
+        computation, applying whatever the current best-in-class method is, and all the complexity required to make
+        that possible.</p>
+
+      <p>A few running apps are Pixel Game, Loveletter, and TextBot. These are mostly for fun and not too technically
+        complex, so I’ll let you explore the publicly available ones yourself!!</p>
+
+      <p>As for future ambitions — I want to explore building products that can connect people, improve productivity,
+        solve real problems, improve people’s lives, and go deeper into LLMs and agents. I have some ideas involving
+        always-on agents, persistent state agents, games, productivity tools, fine-tuning, and other funsies that I
+        look forward to building out bit by bit when I get some more time.</p>
+
+      <p>Oki doke. Now that the main business part is done, time for some FAQs!!</p>
+
+      <p><strong>Q: Can I make requests?</strong><br>
+        A: Feel free to contact me with the contact info in my portfolio. Taking or rejecting these requests is
+        completely at my discretion.</p>
+
+      <p><strong>Q: Are these apps safe?</strong><br>
+        A: I have ensured that they are safe to the best of my ability. Trust me — I have personal information like my
+        phone number on some of them, so I have a stake in this too.</p>
+
+      <p><strong>Q: Is anyone actually asking you these questions?</strong><br>
+        A: No, this is all in my head.</p>
+
+      <p><strong>Q: So what is the point of this if you’re not actually answering any questions real people have and
+          instead are just playing with an imaginary concept of a person asking questions that you know how to
+          answer?</strong><br>
+        A: Isn’t that how every startup nowadays builds their fake testimonials, market comparison, and Q&amp;A to make
+        themselves look good?</p>
+
+      <p><strong>Q: Do you look good?</strong><br>
+        A: I hope so.</p>
+
+      <p><strong>Q: Will this be updated with real questions?</strong><br>
+        A: If people ask them, probably yeah.</p>
+
+      <p><strong>Q: What if I actually have a question?</strong><br>
+        A: Contact me!! I’ll be happy to answer!</p>
+    </article>
+  </main>
+
+  <hr>
+
+  <nav>
+    <a href="../index.html">&larr; Back to the portfolio</a>
+  </nav>
+</body>
+
+</html>
